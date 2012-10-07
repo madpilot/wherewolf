@@ -1,6 +1,34 @@
 = wherewolf
 
-Description goes here.
+== Problem
+
+Most RESTful APIs expose a "/index" endpoint that return all of objects at a given endpoint. That is fine until you need the ability to filter them.
+
+Consider the following scenario:
+
+    /companies.json Return all the companies.
+
+But what if I want only companies that are active? Most developers would simply add a query parameter like so:
+
+    /companies.json?active=true
+
+Ok, now what if you only want companies created after the first of January 2012? Maybe:
+
+    /companies.json?created_after=2012-01-01
+
+Yeah, great - but it doesn't really scale. Wouldn't if be better if we could do something like this?
+
+    /companies.json?where=active%20%3D%20true%20%26%26%20created_at%20%3E%3D%202012-01-01
+
+Ok, it doesn't read amazingly, but this is an API, so encoding that stuff is trivial for the client. For those of you that doesn't speak URI-coded string that is the same as:
+
+    active = true && create_at >= 2012-01-01
+
+Wherewolf will take that string and covert it in to ARel, so your clients can run arbitary queries against your API.
+
+== Where we are at
+
+Early days. The parser is done. I just need to convert that in to an ARel object...
 
 == Contributing to wherewolf
  
@@ -16,4 +44,3 @@ Description goes here.
 
 Copyright (c) 2012 Myles Eftos. See LICENSE.txt for
 further details.
-
