@@ -2,19 +2,14 @@ require 'arel'
 
 module Wherewolf
   class Processor
-    def initialize(model, query)
-      @model = model
-      @query = query
-    end
-
     def self.parse(model, query)
-      instance = self.new(model, query)
-      instance.parse
+      instance = self.new
+      instance.parse(model, query)
     end
 
-    def parse
-      ast = Wherewolf::Parser.new.parse(@query)
-      table = Arel::Table.new(@model.table_name)
+    def parse(model, query)
+      ast = Wherewolf::Parser.new.parse(query)
+      table = Arel::Table.new(model.table_name)
       table.where(process(ast, table))
     end
 
