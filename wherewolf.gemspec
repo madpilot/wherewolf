@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = "wherewolf"
-  s.version = "0.0.0"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Myles Eftos"]
-  s.date = "2012-10-06"
-  s.description = "TODO: longer description of your gem"
+  s.date = "2012-10-10"
+  s.description = "Wherewolf allows you to consume search terms as strings without worrying about database injections. It parses the query and converts it into AREL. It's great for creating filterable REST APIs"
   s.email = "myles@madpilot.com.au"
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -19,42 +19,70 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
     "Gemfile",
+    "Gemfile.lock",
+    "Guardfile",
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
-    "VERSION",
     "lib/wherewolf.rb",
+    "lib/wherewolf/parser.rb",
+    "lib/wherewolf/processor.rb",
+    "lib/wherewolf/railtie.rb",
     "test/helper.rb",
-    "test/test_wherewolf.rb"
+    "test/parser_test.rb",
+    "test/processor_test.rb",
+    "test/railtie_test.rb",
+    "wherewolf.gemspec"
   ]
   s.homepage = "http://github.com/madpilot/wherewolf"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.15"
-  s.summary = "TODO: one-line summary of your gem"
+  s.summary = "Query parser that converts search terms to AREL for use in APIs"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<arel>, [">= 0"])
+      s.add_runtime_dependency(%q<parslet>, [">= 0"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
       s.add_development_dependency(%q<rdoc>, [">= 0"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
+      s.add_development_dependency(%q<guard>, [">= 0"])
+      s.add_development_dependency(%q<guard-test>, [">= 0"])
+      s.add_development_dependency(%q<simplecov>, [">= 0"])
+      s.add_development_dependency(%q<sqlite3>, [">= 0"])
+      s.add_development_dependency(%q<rails>, [">= 0"])
+      s.add_development_dependency(%q<wherewolf>, [">= 0"])
     else
       s.add_dependency(%q<arel>, [">= 0"])
+      s.add_dependency(%q<parslet>, [">= 0"])
       s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<rdoc>, [">= 0"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
+      s.add_dependency(%q<guard>, [">= 0"])
+      s.add_dependency(%q<guard-test>, [">= 0"])
+      s.add_dependency(%q<simplecov>, [">= 0"])
+      s.add_dependency(%q<sqlite3>, [">= 0"])
+      s.add_dependency(%q<rails>, [">= 0"])
+      s.add_dependency(%q<wherewolf>, [">= 0"])
     end
   else
     s.add_dependency(%q<arel>, [">= 0"])
+    s.add_dependency(%q<parslet>, [">= 0"])
     s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<rdoc>, [">= 0"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, [">= 0"])
+    s.add_dependency(%q<guard>, [">= 0"])
+    s.add_dependency(%q<guard-test>, [">= 0"])
+    s.add_dependency(%q<simplecov>, [">= 0"])
+    s.add_dependency(%q<sqlite3>, [">= 0"])
+    s.add_dependency(%q<rails>, [">= 0"])
+    s.add_dependency(%q<wherewolf>, [">= 0"])
   end
 end
 
