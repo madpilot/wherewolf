@@ -36,22 +36,18 @@ The easiest way is to use Bundler:
 
 Then for every model that you want to by queryable, do this:
 
-    ```ruby
     class Player < ActiveRecord::Base
       has_query_parsing
     end
-    ```
 
 This will add the "from_query" method, which you pass your query string in to.
 
 == Example
 
-    ```ruby
     player = Player.from_query("(position = wing || position = lock) && first_cap < 1905-01-01").order('first_cap')
     player = Player.from_query("name = "John Eales")
     player = Player.from_query("first_cap >= 1905-01-01 && active = false")
     player = Player.from_query("first_cap != null")
-    ```
 
 As you can see, from_query returns an ARel object, so you chain other statements to it. Please note, though: at the moment from_query needs to be the first in the chain. 
 
