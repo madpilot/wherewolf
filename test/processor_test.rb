@@ -47,6 +47,12 @@ class ProcessorTest < Test::Unit::TestCase
         assert_equal "Charlie Redwood", player[2].name
       end
 
+      should 'handle matches' do
+        player = Player.from_query('name ~= "James%"')
+        assert_equal 1, player.count
+        assert_equal "James Slipper", player.first.name
+      end
+
       should 'handle nulls' do
         player = Player.from_query("first_cap = null")
         assert_equal 1, player.count

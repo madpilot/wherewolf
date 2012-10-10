@@ -57,6 +57,9 @@ For a real-life, running example, check out: http://wherewolf.herokuapp.com/
 
     player = Player.from_query("first_cap != null")
     # Returns all players who have received their first cap (ie first_cap is NOT nil)
+    
+    player = Player.from_query('name ~= "Peter%"')
+    # Returns all players who's name starts with Peter
 
 As you can see, from_query returns an ARel object, so you chain other statements to it. Please note, though: at the moment from_query needs to be the first in the chain. 
 
@@ -72,8 +75,6 @@ This will get better ;)
 
 * Better error handling
 * Aliases such for operators, such as 'and', 'or' etc
-* Wildcards
-* LIKE operators
 * Allow single quotes around strings
 * Allow from_query to nested (ie Player.where('first_cap < 2000-01-01').from_query('active = true')
 * More edge case testing

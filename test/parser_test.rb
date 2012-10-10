@@ -76,6 +76,25 @@ class ParserTest < Test::Unit::TestCase
         end
       end
 
+      context "matches" do
+        should 'parse [op1]~=[op2]' do
+          result = @parser.parse('name~="Myles"')
+          assert_equal( { :matches => { :left => "name", :right => { :string => "Myles" } } }, result)
+        end
+        should 'parse [op1] ~=[op2]' do
+          result = @parser.parse('name ~="Myles"') 
+          assert_equal( { :matches => { :left => "name", :right => { :string => "Myles" } } }, result)
+        end
+        should 'parse [op1]~= [op2]' do
+          result = @parser.parse('name~= "Myles"') 
+          assert_equal( { :matches => { :left => "name", :right => { :string => "Myles" } } }, result)
+        end
+        should 'parse [op1] ~= [op2]' do
+          result = @parser.parse('name ~= "Myles"') 
+          assert_equal( { :matches => { :left => "name", :right => { :string => "Myles" } } }, result)
+        end
+      end
+
       context "less than" do
         should 'parse [op1]<[op2]' do
           result = @parser.parse("size<12") 

@@ -35,6 +35,10 @@ protected
       table[ast[:left].to_sym].not_eq(parse_value(ast[:right]))
     end
 
+    def process_matches(ast, table)
+      table[ast[:left].to_sym].matches(parse_value(ast[:right]))
+    end
+
     def process_lt(ast, table)
       table[ast[:left].to_sym].lt(parse_value(ast[:right]))
     end
