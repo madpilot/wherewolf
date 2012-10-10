@@ -72,6 +72,8 @@ This will get better ;)
 
 * Better error handling
 * Aliases such for operators, such as 'and', 'or' etc
+* Wildcards
+* LIKE operators
 * Allow single quotes around strings
 * Allow from_query to nested (ie Player.where('first_cap < 2000-01-01').from_query('active = true')
 * More edge case testing
