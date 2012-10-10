@@ -24,11 +24,32 @@ Ok, it doesn't read amazingly, but this is an API, so encoding that stuff is tri
 
     active = true && create_at >= 2012-01-01
 
-Wherewolf will take that string and covert it in to ARel, so your clients can run arbitary queries against your API.
+Wherewolf will take that string and converts it in to AREL, so your clients can run arbitary queries against your API.
 
 == Where we are at
 
-Early days. The parser is done. I just need to convert that in to an ARel object...
+What Works:
+    
+    * &&
+    * ||
+    * =
+    * !=
+    * <
+    * <=
+    * >
+    * >=
+    * Parenthesis
+
+Need to implement:
+    
+    * Aliases such for operators, such as 'and', 'or' etc
+    * Test Rails plugin (This needs to happen before the gem is releasable)
+    * Allow from_query to nested (ie Player.where('first_cap < 2000-01-01').from_query('active = true')
+    * More edge case testing
+
+== Example
+
+    player = Player.from_query("(position = wing || position = lock) && first_cap < 1905-01-01").order('first_cap')
 
 == Contributing to wherewolf
  

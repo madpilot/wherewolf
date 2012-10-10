@@ -36,7 +36,7 @@ class ProcessorTest < Test::Unit::TestCase
     Player.create!(:name => "John Manning", :position => 'fly-half', :first_cap => '1904-07-23', :active => false)
     Player.create!(:name => "Dally Messenger", :position => 'wing', :first_cap => '1907-08-03', :active => false)
     Player.create!(:name => "Salesi Ma'afu", :position => 'prop', :first_cap => '2010-06-05', :active => true)
-    Player.create!(:name => "James Slipper", :position => 'prop', :first_cap => '2010-06-12', :active => true)
+    Player.create!(:name => "James Slipper", :position => 'prop', :first_cap => nil, :active => true)
   end
 
   context 'Processor' do
@@ -53,9 +53,42 @@ class ProcessorTest < Test::Unit::TestCase
   
     context 'Parsing' do
       should 'construct simple boolean statements' do
-        player = Player.parse('name = "Charlie Ellis"')
+        player = Player.from_query('name = "Charlie Ellis"')
         assert_equal 1, player.count
         assert_equal 'Charlie Ellis', player.first.name
+      end
+
+      should 'construct two boolean statments' do
+        player = Player.from_query('position=lock && first_cap < 2010-01-01')
+        assert_equal 1, player.count
+        assert_equal "Patrick 'Paddy' Carew", player.first.name
+      end
+
+      should 'contruct nested brackets' do
+        player = Player.from_query("(position = wing || position = lock) && first_cap < 1905-01-01").order('first_cap')
+        assert_equal 3, player.count
+        assert_equal "Patrick 'Paddy' Carew", player[0].name
+        assert_equal "Syd Miller", player[1].name
+        assert_equal "Charlie Redwood", player[2].name
+      end
+
+      should 'handle nulls' do
+        player = Player.from_query("first_cap = null")
+        assert_equal 1, player.count
+        assert_equal "James Slipper", player.first.name
+      end
+
+      should 'handle booleans' do
+        player = Player.from_query("active = true")
+        assert_equal 2, player.count
+        player = Player.from_query("active = false")
+        assert_equal 8, player.count
+      end
+
+      should 'handle dates' do
+        player = Player.from_query("first_cap > 2000-01-01")
+        assert_equal 1, player.count
+        assert_equal "Salesi Ma'afu", player.first.name
       end
     end
   end

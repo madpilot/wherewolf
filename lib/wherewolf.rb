@@ -14,7 +14,7 @@ module Wherewolf
 
     end
     
-    def parse(query)
+    def from_query(query)
       Wherewolf::Processor.parse(self, query)
     end
   end

@@ -59,7 +59,7 @@ protected
       when :boolean
         return value[:boolean] == "true"
       else
-        return value[value.keys.first].to_s
+        return value[type].to_s
       end
     end
   end
