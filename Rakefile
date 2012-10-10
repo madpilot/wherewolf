@@ -12,16 +12,17 @@ end
 require 'rake'
 
 require 'jeweler'
+
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "wherewolf"
   gem.homepage = "http://github.com/madpilot/wherewolf"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Query parser that converts search terms to AREL for use in APIs}
+  gem.description = %Q{Wherewolf allows you to consume search terms as strings without worrying about database injections. It parses the query and converts it into AREL. It's great for creating filterable REST APIs}
   gem.email = "myles@madpilot.com.au"
   gem.authors = ["Myles Eftos"]
-  gem.version = Wherewolf::VERSION
+  gem.version = "0.1.0"
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
@@ -29,7 +30,7 @@ Jeweler::RubygemsDotOrgTasks.new
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
+  test.pattern = 'test/*_test.rb'
   test.verbose = true
 end
 

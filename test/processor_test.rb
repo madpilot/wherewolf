@@ -1,29 +1,4 @@
 require 'helper'
-require 'thread'
-require 'active_record'
-require 'arel'
-
-ActiveRecord::Migration.verbose = false
-
-class AddUsers < ActiveRecord::Migration
-  def up
-    create_table :players do |t|
-      t.string :name
-      t.string :position
-      t.boolean :active
-      t.date :first_cap
-    end
-  end
-
-  def down
-    drop_table :users
-  end
-end
-
-class Player < ActiveRecord::Base
-  include Wherewolf # Rails will use a Railtie, but we'll test that elsewehere
-  has_query_parsing 
-end
 
 class ProcessorTest < Test::Unit::TestCase
   def setup_fixtures
@@ -65,7 +40,7 @@ class ProcessorTest < Test::Unit::TestCase
       end
 
       should 'contruct nested brackets' do
-        player = Player.from_query("(position = wing || position = lock) && first_cap < 1905-01-01").order('first_cap')
+        player = Player.from_query("(position = wing || position = lock) && first_cap <= 1905-01-01").order('first_cap')
         assert_equal 3, player.count
         assert_equal "Patrick 'Paddy' Carew", player[0].name
         assert_equal "Syd Miller", player[1].name
@@ -89,6 +64,38 @@ class ProcessorTest < Test::Unit::TestCase
         player = Player.from_query("first_cap > 2000-01-01")
         assert_equal 1, player.count
         assert_equal "Salesi Ma'afu", player.first.name
+      end
+
+      should 'process =' do
+        player = Player.from_query('name = "Charlie Ellis"')
+        assert_equal 1, player.count
+        assert_equal 'Charlie Ellis', player.first.name
+      end
+      
+      should 'process !=' do
+        player = Player.from_query('name != "Charlie Ellis"')
+        assert_equal 9, player.count
+        assert_equal false, player.map(&:name).include?('Charlie Ellis')
+      end
+      
+      should 'process >' do
+        player = Player.from_query('first_cap > 1907-08-03')
+        assert_equal 1, player.count
+      end
+      
+      should 'process >=' do
+        player = Player.from_query('first_cap >= 1907-08-03')
+        assert_equal 2, player.count
+      end
+
+      should 'process <' do
+        player = Player.from_query('first_cap < 1907-08-03')
+        assert_equal 7, player.count
+      end
+      
+      should 'process <=' do
+        player = Player.from_query('first_cap <= 1907-08-03')
+        assert_equal 8, player.count
       end
     end
   end

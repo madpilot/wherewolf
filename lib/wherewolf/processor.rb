@@ -31,7 +31,7 @@ protected
       table[ast[:left].to_sym].eq(parse_value(ast[:right]))
     end
 
-    def process_noteq(ast, table)
+    def process_not_eq(ast, table)
       table[ast[:left].to_sym].not_eq(parse_value(ast[:right]))
     end
 

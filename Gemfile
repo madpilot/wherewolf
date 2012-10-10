@@ -12,5 +12,6 @@ group :development do
   gem "guard-test"
   gem "simplecov", :require => false
   gem "sqlite3"
-  gem "activerecord"
+  gem "rails"
+  gem "wherewolf", :path => "./"
 end
