@@ -10,6 +10,7 @@ class AddUsers < ActiveRecord::Migration
     create_table :players do |t|
       t.string :name
       t.string :position
+      t.boolean :active
       t.date :first_cap
     end
   end
@@ -26,16 +27,16 @@ end
 
 class ProcessorTest < Test::Unit::TestCase
   def setup_fixtures
-    Player.create!(:name => "Patrick 'Paddy' Carew", :position => 'lock', :first_cap => '1899-06-24')
-    Player.create!(:name => "Charlie Ellis", :position => 'flanker', :first_cap => '1899-06-24')
-    Player.create!(:name => "Arthur Corfe", :position => 'flanker', :first_cap => '1899-07-22')
-    Player.create!(:name => "Syd Miller", :position => 'wing', :first_cap => '1899-08-05')
-    Player.create!(:name => "Charlie Redwood", :position => 'wing', :first_cap => '1903-08-15')
-    Player.create!(:name => "Patrick 'Pat' Walsh", :position => 'no. 8', :first_cap => '1904-07-02')
-    Player.create!(:name => "John Manning", :position => 'fly-half', :first_cap => '1904-07-23')
-    Player.create!(:name => "Dally Messenger", :position => 'wing', :first_cap => '1907-08-03')
-    Player.create!(:name => "Herbert Moran", :position => 'flanker', :first_cap => '1908-12-12')
-    Player.create!(:name => "Alfred Walker", :position => 'scrum-half', :first_cap => '1912-11-16')
+    Player.create!(:name => "Patrick 'Paddy' Carew", :position => 'lock', :first_cap => '1899-06-24', :active => false)
+    Player.create!(:name => "Charlie Ellis", :position => 'flanker', :first_cap => '1899-06-24', :active => false)
+    Player.create!(:name => "Arthur Corfe", :position => 'flanker', :first_cap => '1899-07-22', :active => false)
+    Player.create!(:name => "Syd Miller", :position => 'wing', :first_cap => '1899-08-05', :active => false)
+    Player.create!(:name => "Charlie Redwood", :position => 'wing', :first_cap => '1903-08-15', :active => false)
+    Player.create!(:name => "Patrick 'Pat' Walsh", :position => 'no. 8', :first_cap => '1904-07-02', :active => false)
+    Player.create!(:name => "John Manning", :position => 'fly-half', :first_cap => '1904-07-23', :active => false)
+    Player.create!(:name => "Dally Messenger", :position => 'wing', :first_cap => '1907-08-03', :active => false)
+    Player.create!(:name => "Salesi Ma'afu", :position => 'prop', :first_cap => '2010-06-05', :active => true)
+    Player.create!(:name => "James Slipper", :position => 'prop', :first_cap => '2010-06-12', :active => true)
   end
 
   context 'Processor' do
@@ -52,7 +53,7 @@ class ProcessorTest < Test::Unit::TestCase
   
     context 'Parsing' do
       should 'construct simple boolean statements' do
-        player = Player.parse('position = "Charlie Ellis"')
+        player = Player.parse('name = "Charlie Ellis"')
         assert_equal 1, player.count
         assert_equal 'Charlie Ellis', player.first.name
       end
