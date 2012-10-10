@@ -44,6 +44,8 @@ This will add the "from_query" method, which you pass your query string in to.
 
 == Example
 
+For a real-life, running example, check out: http://wherewolf.herokuapp.com/
+
     player = Player.from_query("(position = wing || position = lock) && first_cap < 1905-01-01").order('first_cap')
     # Returns all players that play 'wing' or 'lock', and played before 1905-01-01
 
@@ -65,8 +67,6 @@ At the moment, error handling is very primitive. Just capture
     Parslet::ParseFailed
 
 This will get better ;)
-
-For a real-life, running example, check out: http://wherewolf.herokuapp.com/
 
 == To Do
 
