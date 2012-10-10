@@ -34,7 +34,7 @@ module Wherewolf
     end
     rule(:literal) { match('[a-zA-Z0-9\-_]').repeat(1) }
     rule(:identifier) { null | boolean | number | double_quote_string | literal.as(:string) }
-
+    
     # Grammar
     rule(:compare_eq) { (literal.as(:left) >> space? >> eq >> space? >> identifier.as(:right)).as(:eq) }
     rule(:compare_not_eq) { (literal.as(:left) >> space? >> not_eq >> space? >> identifier.as(:right)).as(:not_eq) }

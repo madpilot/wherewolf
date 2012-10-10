@@ -27,6 +27,40 @@ class ProcessorTest < Test::Unit::TestCase
     end
   
     context 'Parsing' do
+      context 'Error' do
+        should 'be raised is there is a parser error' do
+          assert_raise Wherewolf::ParseError do
+            Player.from_query('name ~= "Patrick%" || (position = "fail)')
+          end
+        end
+
+        should 'allow retrieval of the error position' do
+          begin
+            Player.from_query('name ~= "Patrick%" || (position = "fail)')
+          rescue Wherewolf::ParseError => e
+            assert_equal 28, e.position
+          end
+        end
+ 
+
+        should 'show a nice debug error' do
+          begin
+            Player.from_query('name ~= "Patrick%" || (position = "fail)')
+          rescue Wherewolf::ParseError => e
+            assert_equal "Parsing error occured at character 28", e.error_message
+          end
+        end
+      
+        should 'to_s should print out nice error' do
+          begin
+            Player.from_query('name ~= "Patrick%" || (position = "fail)')
+          rescue Wherewolf::ParseError => e
+            assert_equal "Parsing error occured at character 28", e.to_s
+          end
+        end
+
+      end
+
       should 'construct simple boolean statements' do
         player = Player.from_query('name = "Charlie Ellis"')
         assert_equal 1, player.count

@@ -1,5 +1,6 @@
 require File.join(File.dirname(__FILE__), 'wherewolf', 'parser.rb')
 require File.join(File.dirname(__FILE__), 'wherewolf', 'processor.rb')
+require File.join(File.dirname(__FILE__), 'wherewolf', 'parse_error.rb')
 
 module Wherewolf
   def self.included(base)

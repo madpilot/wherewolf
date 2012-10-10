@@ -67,17 +67,37 @@ As you can see, from_query returns an ARel object, so you chain other statements
 
 At the moment, error handling is very primitive. Just capture
 
-    Parslet::ParseFailed
+    Wherewolf::ParseError
 
-This will get better ;)
+You can print out a simple error message like so
+
+    begin
+      Player.from_query('name ~= "Patrick%" || (position = "fail)')
+    rescue Wherewolf::ParseError => e
+      puts e.error_message
+    end
+
+Will print out
+
+    Parsing error occured at character 28
+
+You can get the character number by:
+
+    begin
+      Player.from_query('name ~= "Patrick%" || (position = "fail)')
+    rescue Wherewolf::ParseError => e
+      e.position # This value will be 28
+    end
 
 == To Do
 
-* Better error handling
+* Better error messages (Give a clue as to why parsing failed)
 * Aliases such for operators, such as 'and', 'or' etc
 * Allow single quotes around strings
 * Allow from_query to nested (ie Player.where('first_cap < 2000-01-01').from_query('active = true')
 * More edge case testing
+* Abillity to filter columns that are searchable
+* Ability to call named scopes
 
 == Contributing to wherewolf
  

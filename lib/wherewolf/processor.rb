@@ -8,9 +8,13 @@ module Wherewolf
     end
 
     def parse(model, query)
-      ast = Wherewolf::Parser.new.parse(query)
-      table = model.arel_table
-      model.where(process(ast, table))
+      begin
+        ast = Wherewolf::Parser.new.parse(query)
+        table = model.arel_table
+        model.where(process(ast, table))
+      rescue Parslet::ParseFailed => error
+        raise Wherewolf::ParseError, error
+      end
     end
 
     def process(ast, table)
