@@ -8,23 +8,23 @@ Most RESTful APIs expose a "/index" endpoint that return all of objects at a giv
 
 Consider the following scenario:
 
-    /companies.json # Return all the companies.
+    /players.json 
 
-But what if I want only companies that are active? Most developers would simply add a query parameter like so:
+But what if I want only players that are active? Most developers would simply add a query parameter like so:
 
-    /companies.json?active=true
+    /players.json?active=true
 
-Ok, now what if you only want companies created after the first of January 2012? Maybe:
+Ok, now what if you only want players capped after the first of January 2012? Maybe:
 
-    /companies.json?created_after=2012-01-01
+    /players.json?first_cap=2012-01-01
 
 Yeah, great - but it doesn't really scale. Wouldn't if be better if we could do something like this?
 
-    /companies.json?where=active%20%3D%20true%20%26%26%20created_at%20%3E%3D%202012-01-01
+    /players.json?where=active%20%3D%20true%20%26%26%20first_cap%20%3E%3D%202012-01-01
 
 Ok, it doesn't read amazingly, but this is an API, so encoding that stuff is trivial for the client. For those of you that doesn't speak URI-encoded string that is the same as:
 
-    active = true && created_at >= 2012-01-01
+    active = true && first_cap >= 2012-01-01
 
 Wherewolf will take that string and converts it in to ARel, so your clients can run arbitary queries against your API.
 
@@ -57,6 +57,8 @@ This will add the "from_query" method, which you pass your query string in to.
     # Returns all players who have received their first cap (ie first_cap is NOT nil)
 
 As you can see, from_query returns an ARel object, so you chain other statements to it. Please note, though: at the moment from_query needs to be the first in the chain. 
+
+For a real-life, running example, check out: http://wherewolf.herokuapp.com/
 
 == To Do
 
