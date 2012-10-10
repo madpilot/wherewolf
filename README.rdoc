@@ -58,10 +58,19 @@ This will add the "from_query" method, which you pass your query string in to.
 
 As you can see, from_query returns an ARel object, so you chain other statements to it. Please note, though: at the moment from_query needs to be the first in the chain. 
 
+== Errors
+
+At the moment, error handling is very primitive. Just capture
+
+    Parslet::ParseFailed
+
+This will get better ;)
+
 For a real-life, running example, check out: http://wherewolf.herokuapp.com/
 
 == To Do
 
+* Better error handling
 * Aliases such for operators, such as 'and', 'or' etc
 * Allow single quotes around strings
 * Allow from_query to nested (ie Player.where('first_cap < 2000-01-01').from_query('active = true')
