@@ -1,6 +1,6 @@
 = wherewolf
 
-Makes filtering and searching to your REST API crazy easy.
+Makes adding filtering and searching to your REST API crazy easy.
 
 == Problem
 
