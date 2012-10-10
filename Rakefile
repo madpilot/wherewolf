@@ -18,8 +18,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "wherewolf"
   gem.homepage = "http://github.com/madpilot/wherewolf"
   gem.license = "MIT"
-  gem.summary = %Q{Query parser that converts search terms to AREL for use in APIs}
-  gem.description = %Q{Wherewolf allows you to consume search terms as strings without worrying about database injections. It parses the query and converts it into AREL. It's great for creating filterable REST APIs}
+  gem.summary = %Q{Makes filtering and searching to your REST API crazy easy.}
+  gem.description = %Q{Wherewolf allows you to consume search terms as strings without worrying about database injections. It parses the query and converts it into ARel. It's great for creating filterable REST APIs.}
   gem.email = "myles@madpilot.com.au"
   gem.authors = ["Myles Eftos"]
   gem.version = "0.1.0"
