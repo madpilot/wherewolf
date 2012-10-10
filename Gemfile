@@ -11,4 +11,5 @@ group :development do
   gem "guard"
   gem "guard-test"
   gem "simplecov", :require => false
+  gem "activerecord"
 end
