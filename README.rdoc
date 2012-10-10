@@ -22,7 +22,7 @@ Yeah, great - but it doesn't really scale. Wouldn't if be better if we could do 
 
 Ok, it doesn't read amazingly, but this is an API, so encoding that stuff is trivial for the client. For those of you that doesn't speak URI-coded string that is the same as:
 
-    active = true && create_at >= 2012-01-01
+    active = true && created_at >= 2012-01-01
 
 Wherewolf will take that string and converts it in to AREL, so your clients can run arbitary queries against your API.
 
