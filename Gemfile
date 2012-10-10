@@ -11,5 +11,6 @@ group :development do
   gem "guard"
   gem "guard-test"
   gem "simplecov", :require => false
+  gem "sqlite3"
   gem "activerecord"
 end

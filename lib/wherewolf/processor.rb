@@ -9,8 +9,8 @@ module Wherewolf
 
     def parse(model, query)
       ast = Wherewolf::Parser.new.parse(query)
-      table = Arel::Table.new(model.table_name)
-      table.where(process(ast, table))
+      table = model.arel_table
+      model.where(process(ast, table))
     end
 
     def process(ast, table)
@@ -27,27 +27,27 @@ module Wherewolf
     end
 
     def process_eq(ast, table)
-      table[ast[:left].eq(ast[:right])
+      table[ast[:left].to_sym].eq(ast[:right].to_s)
     end
 
     def process_noteq(ast, table)
-      table[ast[:left].not_eq(ast[:right])
+      table[ast[:left].to_sym].not_eq(ast[:right].to_s)
     end
 
     def process_lt(ast, table)
-      table[ast[:left].lt(ast[:right])
+      table[ast[:left].to_sym].lt(ast[:right].to_s)
     end
 
     def process_lteq(ast, table)
-      table[ast[:left].lteq(ast[:right])
+      table[ast[:left].to_sym].lteq(ast[:right].to_s)
     end
 
     def process_gt(ast, table)
-      table[ast[:left].gt(ast[:right])
+      table[ast[:left].to_sym].gt(ast[:right].to_s)
     end
 
     def process_gteq(ast, table)
-      table[ast[:left].gteq(ast[:right])
+      table[ast[:left].to_sym].gteq(ast[:right].to_s)
     end
   end
 end

@@ -7,15 +7,15 @@ module Wherewolf
 
   def self.included(base)
     base.send :extend, ClassMethods
+  end
+  
+  module ClassMethods
+    def has_query_parsing(options = {})
 
-    module ClassMethods
-      def has_query_parsing(options = {})
-
-      end
-
-      def parse(query)
-        Wherewolf::Processor.parse(self, query)
-      end
+    end
+    
+    def parse(query)
+      Wherewolf::Processor.parse(self, query)
     end
   end
 end
