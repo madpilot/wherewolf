@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = "wherewolf"
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Myles Eftos"]
   s.date = "2012-10-10"
-  s.description = "Wherewolf allows you to consume search terms as strings without worrying about database injections. It parses the query and converts it into AREL. It's great for creating filterable REST APIs"
+  s.description = "Wherewolf allows you to consume search terms as strings without worrying about database injections. It parses the query and converts it into ARel. It's great for creating filterable REST APIs."
   s.email = "myles@madpilot.com.au"
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -25,10 +25,12 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "lib/wherewolf.rb",
+    "lib/wherewolf/parse_error.rb",
     "lib/wherewolf/parser.rb",
     "lib/wherewolf/processor.rb",
     "lib/wherewolf/railtie.rb",
     "test/helper.rb",
+    "test/parse_error_test.rb",
     "test/parser_test.rb",
     "test/processor_test.rb",
     "test/railtie_test.rb",
@@ -38,7 +40,7 @@ Gem::Specification.new do |s|
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.15"
-  s.summary = "Query parser that converts search terms to AREL for use in APIs"
+  s.summary = "Makes filtering and searching to your REST API crazy easy."
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
