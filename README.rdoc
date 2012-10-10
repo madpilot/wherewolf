@@ -30,22 +30,22 @@ Wherewolf will take that string and converts it in to AREL, so your clients can 
 
 What Works:
     
-    * &&
-    * ||
-    * =
-    * !=
-    * <
-    * <=
-    * >
-    * >=
-    * Parenthesis
+* &&
+* ||
+* =
+* !=
+* <
+* <=
+* >
+* >=
+* Parenthesis
 
 Need to implement:
     
-    * Aliases such for operators, such as 'and', 'or' etc
-    * Test Rails plugin (This needs to happen before the gem is releasable)
-    * Allow from_query to nested (ie Player.where('first_cap < 2000-01-01').from_query('active = true')
-    * More edge case testing
+* Aliases such for operators, such as 'and', 'or' etc
+* Test Rails plugin (This needs to happen before the gem is releasable)
+* Allow from_query to nested (ie Player.where('first_cap < 2000-01-01').from_query('active = true')
+* More edge case testing
 
 == Example
 
