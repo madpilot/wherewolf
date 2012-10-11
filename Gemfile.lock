@@ -1,7 +1,7 @@
 PATH
   remote: ./
   specs:
-    wherewolf (0.2.0)
+    wherewolf (0.3.0)
       arel
       parslet
 
