@@ -13,5 +13,5 @@ group :development do
   gem "simplecov", :require => false
   gem "sqlite3"
   gem "rails"
-  gem "wherewolf", :path => "./"
+  gem "mocha"
 end

@@ -2,7 +2,7 @@ require 'arel'
 
 module Wherewolf
   module Where
-    class Processor
+    class Processor < Wherewolf::Processor
       def self.parse(model, query)
         instance = self.new
         instance.parse(model, query)
@@ -65,14 +65,6 @@ module Wherewolf
       def process_gteq(ast, table)
         check_column!(ast[:left], table)
         table[ast[:left].to_sym].gteq(parse_value(ast[:right]))
-      end
-
-      def check_column!(value, table)
-        unless table.columns.map(&:name).include?(value.to_sym)
-          source = Parslet::Source.new(value.to_s)
-          cause = Parslet::Cause.new('Column not found', source, value.offset, [])
-          raise Parslet::ParseFailed.new('Column not found', cause) 
-        end
       end
 
       def parse_value(value)

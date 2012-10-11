@@ -1,3 +1,4 @@
+require File.join(File.dirname(__FILE__), 'wherewolf', 'processor.rb')
 require File.join(File.dirname(__FILE__), 'wherewolf', 'where', 'parser.rb')
 require File.join(File.dirname(__FILE__), 'wherewolf', 'where', 'processor.rb')
 require File.join(File.dirname(__FILE__), 'wherewolf', 'order', 'parser.rb')
