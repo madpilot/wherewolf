@@ -63,6 +63,22 @@ For a real-life, running example, check out: http://wherewolf.herokuapp.com/
 
 As you can see, where_query returns an ARel object, so you chain other statements to it. Please note, though: at the moment where_query needs to be the first in the chain. 
 
+== Order
+
+You can also supply an order_query to handle ordering
+
+    player = Player.order_query("name asc")
+    # Order by name asc
+    
+    player = Player.order_query("name desc")
+    # Order by name desc
+    
+    player = Player.order_query("name")
+    # By default ordering is ascending
+
+    player = Player.order_query("name desc, position desc")
+    # You can also have multiple order columns
+
 == Errors
 
 At the moment, error handling is very primitive. Just capture
