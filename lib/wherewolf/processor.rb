@@ -32,31 +32,46 @@ protected
     end
 
     def process_eq(ast, table)
+      check_column!(ast[:left], table)
       table[ast[:left].to_sym].eq(parse_value(ast[:right]))
     end
 
     def process_not_eq(ast, table)
+      check_column!(ast[:left], table)
       table[ast[:left].to_sym].not_eq(parse_value(ast[:right]))
     end
 
     def process_matches(ast, table)
+      check_column!(ast[:left], table)
       table[ast[:left].to_sym].matches(parse_value(ast[:right]))
     end
 
     def process_lt(ast, table)
+      check_column!(ast[:left], table)
       table[ast[:left].to_sym].lt(parse_value(ast[:right]))
     end
 
     def process_lteq(ast, table)
+      check_column!(ast[:left], table)
       table[ast[:left].to_sym].lteq(parse_value(ast[:right]))
     end
 
     def process_gt(ast, table)
+      check_column!(ast[:left], table)
       table[ast[:left].to_sym].gt(parse_value(ast[:right]))
     end
 
     def process_gteq(ast, table)
+      check_column!(ast[:left], table)
       table[ast[:left].to_sym].gteq(parse_value(ast[:right]))
+    end
+
+    def check_column!(value, table)
+      unless table.columns.map(&:name).include?(value.to_sym)
+        source = Parslet::Source.new(value.to_s)
+        cause = Parslet::Cause.new('Column not found', source, value.offset, [])
+        raise Parslet::ParseFailed.new('Column not found', cause) 
+      end
     end
 
     def parse_value(value)

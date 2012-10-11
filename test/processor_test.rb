@@ -41,7 +41,6 @@ class ProcessorTest < Test::Unit::TestCase
             assert_equal 28, e.position
           end
         end
- 
 
         should 'show a nice debug error' do
           begin
@@ -58,7 +57,20 @@ class ProcessorTest < Test::Unit::TestCase
             assert_equal "Parsing error occured at character 28", e.to_s
           end
         end
+        
+        should 'be raised if the requested column is not in the list' do
+          assert_raise Wherewolf::ParseError do
+            Player.from_query('shoe_size > 10')
+          end
+        end
 
+        should 'show a nice debug error if the requested column is not in the list' do
+          begin
+            Player.from_query('shoe_size > 10')
+          rescue Wherewolf::ParseError => e
+            assert_equal "Parsing error occured at character 0", e.to_s
+          end
+        end
       end
 
       should 'construct simple boolean statements' do
