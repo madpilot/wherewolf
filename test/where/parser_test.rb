@@ -1,7 +1,7 @@
 require 'helper'
 
-class ParserTest < Test::Unit::TestCase
-  context 'Parser' do
+class WhereParserTest < Test::Unit::TestCase
+  context 'WhereParser' do
     setup do
       @parser = Wherewolf::Where::Parser.new
     end

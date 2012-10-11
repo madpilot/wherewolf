@@ -1,5 +1,7 @@
 require File.join(File.dirname(__FILE__), 'wherewolf', 'where', 'parser.rb')
 require File.join(File.dirname(__FILE__), 'wherewolf', 'where', 'processor.rb')
+require File.join(File.dirname(__FILE__), 'wherewolf', 'order', 'parser.rb')
+require File.join(File.dirname(__FILE__), 'wherewolf', 'order', 'processor.rb')
 require File.join(File.dirname(__FILE__), 'wherewolf', 'parse_error.rb')
 
 module Wherewolf
@@ -19,7 +21,7 @@ module Wherewolf
     end
 
     def order_query(query)
-      Wherewold::Order::Processor.parse(self, query)
+      Wherewolf::Order::Processor.parse(self, query)
     end
   end
 end

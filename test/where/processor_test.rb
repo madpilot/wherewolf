@@ -1,6 +1,6 @@
 require 'helper'
 
-class ProcessorTest < Test::Unit::TestCase
+class WhereProcessorTest < Test::Unit::TestCase
   def setup_fixtures
     Player.create!(:name => "Patrick 'Paddy' Carew", :position => 'lock', :first_cap => '1899-06-24', :active => false)
     Player.create!(:name => "Charlie Ellis", :position => 'flanker', :first_cap => '1899-06-24', :active => false)
@@ -14,7 +14,7 @@ class ProcessorTest < Test::Unit::TestCase
     Player.create!(:name => "James Slipper", :position => 'prop', :first_cap => nil, :active => true)
   end
 
-  context 'Processor' do
+  context 'WhereProcessor' do
     setup do
       ActiveRecord::Base.establish_connection({
         :adapter => 'sqlite3',
