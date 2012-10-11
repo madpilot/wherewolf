@@ -3,7 +3,7 @@ require 'helper'
 class ParserTest < Test::Unit::TestCase
   context 'Parser' do
     setup do
-      @parser = Wherewolf::Parser.new
+      @parser = Wherewolf::Where::Parser.new
     end
 
     context "operands" do
