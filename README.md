@@ -1,10 +1,10 @@
-= wherewolf
+# wherewolf
 
 Makes adding filtering and searching to your REST API crazy easy.
 
 [![Build Status](https://secure.travis-ci.org/madpilot/wherewolf.png)](http://travis-ci.org/madpilot/wherewolf) [![Dependency Status](https://gemnasium.com/madpilot/wherewolf.png)](https://gemnasium.com/madpilot/wherewolf)
 
-== Problem
+## Problem
 
 Most RESTful APIs expose a "/index" endpoint that return all of objects at a given endpoint. That is fine until you need the ability to filter them.
 
@@ -30,7 +30,7 @@ Ok, it doesn't read amazingly, but this is an API, so encoding that stuff is tri
 
 Wherewolf will take that string and converts it in to ARel, so your clients can run arbitary queries against your API.
 
-== Get started
+## Get started
 
 The easiest way is to use Bundler:
 
@@ -66,7 +66,7 @@ Both whitelist and blacklist can take a proc if you want to lazy evaluate
 
 would restrict the searchable columns to those exposed by accessible_attributes
 
-== Example
+## Example
 
 For a real-life, running example, check out: http://wherewolf.herokuapp.com/
 
@@ -87,7 +87,7 @@ For a real-life, running example, check out: http://wherewolf.herokuapp.com/
 
 As you can see, where_query returns an ARel object, so you chain other statements to it.
 
-== Order
+## Order
 
 You can also supply an order_query to handle ordering
 
@@ -107,7 +107,7 @@ Of course, you can nest them...
 
     player = Player.where_query("first_cap != null").order_query('name desc')
 
-== Errors
+## Errors
 
 At the moment, error handling is very primitive. Just capture
 
@@ -133,7 +133,7 @@ You can get the character number by:
       e.position # This value will be 28
     end
 
-== To Do
+## To Do
 
 * Better error messages (Give a clue as to why parsing failed)
 * Aliases such for operators, such as 'and', 'or' etc
@@ -141,7 +141,7 @@ You can get the character number by:
 * More edge case testing
 * Ability to call named scopes
 
-== Contributing to wherewolf
+## Contributing to wherewolf
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
@@ -151,7 +151,7 @@ You can get the character number by:
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-== Copyright
+## Copyright
 
 Copyright (c) 2012 Myles Eftos. See LICENSE.txt for
 further details.
