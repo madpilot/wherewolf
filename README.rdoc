@@ -61,7 +61,7 @@ For a real-life, running example, check out: http://wherewolf.herokuapp.com/
     player = Player.where_query('name ~= "Peter%"')
     # Returns all players who's name starts with Peter
 
-As you can see, where_query returns an ARel object, so you chain other statements to it. Please note, though: at the moment where_query needs to be the first in the chain. 
+As you can see, where_query returns an ARel object, so you chain other statements to it.
 
 == Order
 
@@ -78,6 +78,10 @@ You can also supply an order_query to handle ordering
 
     player = Player.order_query("name desc, position desc")
     # You can also have multiple order columns
+
+Of course you can nest them...
+
+    player = Player.where_query("first_cap != null").order_query('name desc')
 
 == Errors
 
