@@ -2,6 +2,8 @@
 
 Makes adding filtering and searching to your REST API crazy easy.
 
+[![Build Status](https://secure.travis-ci.org/madpilot/wherewolf.png)](http://travis-ci.org/madpilot/wherewolf) [![Dependency Status](https://gemnasium.com/madpilot/wherewolf.png)](https://gemnasium.com/madpilot/wherewolf)
+
 == Problem
 
 Most RESTful APIs expose a "/index" endpoint that return all of objects at a given endpoint. That is fine until you need the ability to filter them.
