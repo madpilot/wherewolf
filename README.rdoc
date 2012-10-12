@@ -79,7 +79,7 @@ You can also supply an order_query to handle ordering
     player = Player.order_query("name desc, position desc")
     # You can also have multiple order columns
 
-Of course you can nest them...
+Of course, you can nest them...
 
     player = Player.where_query("first_cap != null").order_query('name desc')
 
@@ -114,7 +114,6 @@ You can get the character number by:
 * Better error messages (Give a clue as to why parsing failed)
 * Aliases such for operators, such as 'and', 'or' etc
 * Allow single quotes around strings
-* Allow where_query to nested (ie Player.where('first_cap < 2000-01-01').where_query('active = true')
 * More edge case testing
 * Abillity to filter columns that are searchable
 * Ability to call named scopes
