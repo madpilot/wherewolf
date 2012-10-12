@@ -43,7 +43,11 @@ class ProcessorTest < Test::Unit::TestCase
       end
 
       should 'evaluate options[:whitelist] if is a proc' do
-        assert_equal [ :name, :type ], Wherewolf::Processor.new(Player, :whitelist => proc { return [ :name, :type ] }).send(:whitelist)
+        assert_equal [ :name, :type ], Wherewolf::Processor.new(Player, :whitelist => proc { |model| [ :name, :type ] }).send(:whitelist)
+      end
+      
+      should 'pass model into whitelist proc' do
+        assert_equal [ :name, ], Wherewolf::Processor.new(Country, :whitelist => proc { |model| model.accessible_attributes.map(&:to_sym) }).send(:whitelist)
       end
     end
   
@@ -57,7 +61,11 @@ class ProcessorTest < Test::Unit::TestCase
       end
 
       should 'evaluate options[:blacklist] if is a proc' do
-        assert_equal [ :name, :type ], Wherewolf::Processor.new(Player, :blacklist => proc { return [ :name, :type ] }).send(:blacklist)
+        assert_equal [ :name, :type ], Wherewolf::Processor.new(Player, :blacklist => proc { |model| [ :name, :type ] }).send(:blacklist)
+      end
+
+      should 'pass model into blacklist proc' do
+        assert_equal [ :name ], Wherewolf::Processor.new(Country, :blacklist => proc { |model| model.accessible_attributes.map(&:to_sym) }).send(:blacklist)
       end
     end
   end

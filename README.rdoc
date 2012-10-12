@@ -59,7 +59,7 @@ Setting blacklist will remove those columns from the list
 Both whitelist and blacklist can take a proc if you want to lazy evaluate
 
     class Player < ActiveRecord::Base
-      has_query_parsing :whitelist => proc { |model| model.accessible_attributes }
+      has_query_parsing :whitelist => proc { |model| model.accessible_attributes.map(&:to_sym) }
     end
 
 would restrict the searchable columns to those exposed by accessible_attributes

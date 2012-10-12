@@ -12,15 +12,11 @@ module Wherewolf
   
   module ClassMethods
     def has_query_parsing(options = {})
-      self.class_eval <<-EOV
-        def self.wherewolf_options
-          #{options}
-        end
-      EOV
-
       self.class_eval do
+        cattr_accessor :wherewolf_options
         scope :where_query, lambda { |query| Wherewolf::Where::Processor.parse(self, query) }
         scope :order_query, lambda { |query| Wherewolf::Order::Processor.parse(self, query) }
+        self.wherewolf_options = options
       end
     end
   end

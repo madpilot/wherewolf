@@ -46,7 +46,8 @@ class AddUsers < ActiveRecord::Migration
     end
     
     create_table :countries do |t|
-      t.string :team
+      t.string :name
+      t.string :jersey_color
     end
   end
 
@@ -65,6 +66,7 @@ class Team < ActiveRecord::Base
 end
 
 class Country < ActiveRecord::Base
+  attr_accessible :name
   has_query_parsing :whitelist => [ :name ]
 end
 

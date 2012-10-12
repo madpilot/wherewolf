@@ -22,13 +22,13 @@ module Wherewolf
     end
 
     def whitelist
-      return @options[:whitelist].call if @options[:whitelist].is_a?(Proc)
+      return @options[:whitelist].call(self.model) if @options[:whitelist].is_a?(Proc)
       return @options[:whitelist] if @options[:whitelist]
       return nil
     end
 
     def blacklist
-      return @options[:blacklist].call if @options[:blacklist].is_a?(Proc)
+      return @options[:blacklist].call(self.model) if @options[:blacklist].is_a?(Proc)
       return @options[:blacklist] if @options[:blacklist]
       return nil
     end
