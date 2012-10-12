@@ -4,14 +4,18 @@ gem "arel"
 gem "parslet"
 
 group :development do
-  gem "shoulda"
-  gem "rdoc"
-  gem "bundler"
+  gem "simplecov", :require => false
   gem "jeweler"
+  gem "bundler"
+  gem "rdoc"
   gem "guard"
   gem "guard-test"
-  gem "simplecov", :require => false
+end
+
+group :test do
+  gem "shoulda"
   gem "sqlite3"
   gem "rails"
   gem "mocha"
+  gem "rake"
 end
