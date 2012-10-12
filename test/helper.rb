@@ -44,11 +44,16 @@ class AddUsers < ActiveRecord::Migration
     create_table :teams do |t|
       t.string :team
     end
+    
+    create_table :countries do |t|
+      t.string :team
+    end
   end
 
   def down
     drop_table :users
     drop_table :teams
+    drop_table :countries
   end
 end
 
@@ -57,6 +62,10 @@ class Player < ActiveRecord::Base
 end
 
 class Team < ActiveRecord::Base
+end
+
+class Country < ActiveRecord::Base
+  has_query_parsing :whitelist => [ :name ]
 end
 
 class Test::Unit::TestCase

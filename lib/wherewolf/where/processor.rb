@@ -4,15 +4,15 @@ module Wherewolf
   module Where
     class Processor < Wherewolf::Processor
       def self.parse(model, query)
-        instance = self.new
-        instance.parse(model, query)
+        instance = self.new(model, model.wherewolf_options)
+        instance.parse(query)
       end
 
-      def parse(model, query)
+      def parse(query)
         begin
           ast = Wherewolf::Where::Parser.new.parse(query)
           table = model.arel_table
-          model.where(process(ast, table))
+          self.model.where(process(ast, table))
         rescue Parslet::ParseFailed => error
           raise Wherewolf::ParseError, error
         end

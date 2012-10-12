@@ -40,7 +40,29 @@ Then for every model that you want to by queryable, do this:
       has_query_parsing
     end
 
-This will add the "where_query" method, which you pass your query string in to.
+This will add the "where_query" and "order_query" methods, which you pass your query string in to.
+
+has_query_parsing can take two options: whitelist and blacklist which allow you to set which columns consumers can search against
+
+Setting whitelist will mean ONLY those columns will be searchable
+
+    class Player < ActiveRecord::Base
+      has_query_parsing :whitelist => [ :name ]   # Only name will be searchable
+    end
+
+Setting blacklist will remove those columns from the list
+
+    class Player < ActiveRecord::Base
+      has_query_parsing :blacklist => [ :name ]   # Name will not be searchable
+    end
+
+Both whitelist and blacklist can take a proc if you want to lazy evaluate
+
+    class Player < ActiveRecord::Base
+      has_query_parsing :whitelist => proc { |model| model.accessible_attributes }
+    end
+
+would restrict the searchable columns to those exposed by accessible_attributes
 
 == Example
 
@@ -115,7 +137,6 @@ You can get the character number by:
 * Aliases such for operators, such as 'and', 'or' etc
 * Allow single quotes around strings
 * More edge case testing
-* Abillity to filter columns that are searchable
 * Ability to call named scopes
 
 == Contributing to wherewolf

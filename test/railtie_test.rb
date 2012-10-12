@@ -6,7 +6,19 @@ class RailtieTest < Test::Unit::TestCase
       setup_database
       setup_fixtures
     end
+
+    should 'not enable wherewolf_options if has_query_parsing is not called' do
+      assert_equal false, Team.respond_to?(:wherewolf_options)
+    end
     
+    should 'enable wherewolf_options if has_query_parsing is called' do
+      assert_equal true, Player.respond_to?(:wherewolf_options)
+    end
+
+    should 'set wherewolf_options' do
+      assert_equal({ :whitelist => [ :name ] }, Country.wherewolf_options)
+    end
+
     should 'not enable where_query if has_query_parsing is not called' do
       assert_equal false, Team.respond_to?(:where_query)
     end
