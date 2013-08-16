@@ -22,7 +22,7 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{Wherewolf allows you to consume search terms as strings without worrying about database injections. It parses the query and converts it into ARel. It's great for creating filterable REST APIs.}
   gem.email = "myles@madpilot.com.au"
   gem.authors = ["Myles Eftos"]
-  gem.version = "0.6.0"
+  gem.version = "0.7.0"
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
