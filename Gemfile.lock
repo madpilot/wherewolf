@@ -130,6 +130,7 @@ DEPENDENCIES
   mocha
   parslet
   rails
+  rake
   rdoc
   shoulda
   simplecov

@@ -1,8 +1,8 @@
-= wherewolf
+# wherewolf [![Build Status](https://secure.travis-ci.org/madpilot/wherewolf.png)](http://travis-ci.org/madpilot/wherewolf) 
 
 Makes adding filtering and searching to your REST API crazy easy.
 
-== Problem
+## Problem
 
 Most RESTful APIs expose a "/index" endpoint that return all of objects at a given endpoint. That is fine until you need the ability to filter them.
 
@@ -28,7 +28,7 @@ Ok, it doesn't read amazingly, but this is an API, so encoding that stuff is tri
 
 Wherewolf will take that string and converts it in to ARel, so your clients can run arbitary queries against your API.
 
-== Get started
+## Get started
 
 The easiest way is to use Bundler:
 
@@ -36,9 +36,11 @@ The easiest way is to use Bundler:
 
 Then for every model that you want to by queryable, do this:
 
-    class Player < ActiveRecord::Base
-      has_query_parsing
-    end
+```ruby
+class Player < ActiveRecord::Base
+  has_query_parsing
+end
+```
 
 This will add the "where_query" and "order_query" methods, which you pass your query string in to.
 
@@ -46,78 +48,92 @@ has_query_parsing can take two options: whitelist and blacklist which allow you 
 
 Setting whitelist will mean ONLY those columns will be searchable
 
-    class Player < ActiveRecord::Base
-      has_query_parsing :whitelist => [ :name ]   # Only name will be searchable
-    end
+```ruby
+class Player < ActiveRecord::Base
+  has_query_parsing :whitelist => [ :name ]   # Only name will be searchable
+end
 
 Setting blacklist will remove those columns from the list
 
-    class Player < ActiveRecord::Base
-      has_query_parsing :blacklist => [ :name ]   # Name will not be searchable
-    end
+class Player < ActiveRecord::Base
+  has_query_parsing :blacklist => [ :name ]   # Name will not be searchable
+end
+```
 
 Both whitelist and blacklist can take a proc if you want to lazy evaluate
 
-    class Player < ActiveRecord::Base
-      has_query_parsing :whitelist => proc { |model| model.accessible_attributes.map(&:to_sym) }
-    end
+```ruby
+class Player < ActiveRecord::Base
+  has_query_parsing :whitelist => proc { |model| model.accessible_attributes.map(&:to_sym) }
+end
+```
 
 would restrict the searchable columns to those exposed by accessible_attributes
 
-== Example
+## Example
 
 For a real-life, running example, check out: http://wherewolf.herokuapp.com/
 
-    player = Player.where_query("(position = wing || position = lock) && first_cap < 1905-01-01").order('first_cap')
-    # Returns all players that play 'wing' or 'lock', and played before 1905-01-01
+```ruby
+player = Player.where_query("(position = wing || position = lock) && first_cap < 1905-01-01").order('first_cap')
+# Returns all players that play 'wing' or 'lock', and played before 1905-01-01
 
-    player = Player.where_query('name = "John Eales"')
-    # Returns all players names 'John Eales'
+player = Player.where_query('name = "John Eales"')
+# Returns all players names 'John Eales'
 
-    player = Player.where_query("first_cap >= 1905-01-01 && active = false")
-    # Returns all inactitve players that played after 1905-01-01.
+player = Player.where_query("first_cap >= 1905-01-01 && active = false")
+# Returns all inactitve players that played after 1905-01-01.
 
-    player = Player.where_query("first_cap != null")
-    # Returns all players who have received their first cap (ie first_cap is NOT nil)
-    
-    player = Player.where_query('name ~= "Peter%"')
-    # Returns all players who's name starts with Peter
+player = Player.where_query("first_cap != null")
+# Returns all players who have received their first cap (ie first_cap is NOT nil)
+
+player = Player.where_query('name ~= "Peter%"')
+# Returns all players who's name starts with Peter
+```
 
 As you can see, where_query returns an ARel object, so you chain other statements to it.
 
-== Order
+## Order
 
 You can also supply an order_query to handle ordering
 
-    player = Player.order_query("name asc")
-    # Order by name asc
-    
-    player = Player.order_query("name desc")
-    # Order by name desc
-    
-    player = Player.order_query("name")
-    # By default ordering is ascending
+```ruby
+player = Player.order_query("name asc")
+# Order by name asc
 
-    player = Player.order_query("name desc, position desc")
-    # You can also have multiple order columns
+player = Player.order_query("name desc")
+# Order by name desc
+
+player = Player.order_query("name")
+# By default ordering is ascending
+
+player = Player.order_query("name desc, position desc")
+# You can also have multiple order columns
+```
 
 Of course, you can nest them...
 
-    player = Player.where_query("first_cap != null").order_query('name desc')
+```ruby
+player = Player.where_query("first_cap != null").order_query('name desc')
+```
 
-== Errors
+## Errors
 
 At the moment, error handling is very primitive. Just capture
 
-    Wherewolf::ParseError
+```ruby
+Wherewolf::ParseError
+```
 
 You can print out a simple error message like so
 
-    begin
-      Player.where_query('name ~= "Patrick%" || (position = "fail)')
-    rescue Wherewolf::ParseError => e
-      puts e.error_message
-    end
+```ruby
+begin
+  Player.where_query('name ~= "Patrick%" || (position = "fail)')
+rescue Wherewolf::ParseError => e
+  puts e.error_message
+end
+```
 
 Will print out
 
@@ -125,13 +141,15 @@ Will print out
 
 You can get the character number by:
 
-    begin
-      Player.where_query('name ~= "Patrick%" || (position = "fail)')
-    rescue Wherewolf::ParseError => e
-      e.position # This value will be 28
-    end
+```ruby
+begin
+  Player.where_query('name ~= "Patrick%" || (position = "fail)')
+rescue Wherewolf::ParseError => e
+  e.position # This value will be 28
+end
+```
 
-== To Do
+## To Do
 
 * Better error messages (Give a clue as to why parsing failed)
 * Aliases such for operators, such as 'and', 'or' etc
@@ -139,7 +157,7 @@ You can get the character number by:
 * More edge case testing
 * Ability to call named scopes
 
-== Contributing to wherewolf
+## Contributing to wherewolf
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
@@ -149,7 +167,6 @@ You can get the character number by:
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-== Copyright
+## Copyright
 
-Copyright (c) 2012 Myles Eftos. See LICENSE.txt for
-further details.
+Copyright (c) 2012 [MadPilot Productions](http://www.madpilot.com.au/). See LICENSE.txt for further details.
