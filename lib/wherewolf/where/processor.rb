@@ -20,16 +20,16 @@ module Wherewolf
 
       def process(ast, table)
         operation = ast.keys.first
-        self.send("process_#{operation}".to_sym, ast[operation], table) if self.respond_to?("process_#{operation}".to_sym)
+        self.send("process_#{operation}".to_sym, ast[operation], table) if self.respond_to?("process_#{operation}".to_sym, true)
       end
 
   protected
       def process_and(ast, table)
-        process(ast[:left], table).and(process(ast[:right], table))     
+        process(ast[:left], table).and(process(ast[:right], table))
       end
 
       def process_or(ast, table)
-        process(ast[:left], table).or(process(ast[:right], table))     
+        process(ast[:left], table).or(process(ast[:right], table))
       end
 
       def process_eq(ast, table)
