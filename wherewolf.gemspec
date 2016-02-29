@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "wherewolf"
-  s.version = "0.7.0"
+  s.version = "0.8.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Myles Eftos"]
-  s.date = "2013-08-16"
+  s.date = "2016-02-29"
   s.description = "Wherewolf allows you to consume search terms as strings without worrying about database injections. It parses the query and converts it into ARel. It's great for creating filterable REST APIs."
   s.email = "myles@madpilot.com.au"
   s.extra_rdoc_files = [
