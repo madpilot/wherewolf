@@ -10,12 +10,12 @@ module Wherewolf
       unless columns(table).include?(value.to_sym)
         source = Parslet::Source.new(value.to_s)
         cause = Parslet::Cause.new('Column not found', source, value.offset, [])
-        raise Parslet::ParseFailed.new('Column not found', cause) 
+        raise Parslet::ParseFailed.new('Column not found', cause)
       end
     end
 
     def columns(table)
-      columns = table.columns.map(&:name)
+      columns = table.engine.columns.map(&:name).map(&:to_sym)
       columns = columns & whitelist if whitelist
       columns -= blacklist if blacklist
       columns
