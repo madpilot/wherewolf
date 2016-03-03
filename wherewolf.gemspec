@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Myles Eftos"]
-  s.date = "2016-02-29"
+  s.date = "2016-03-03"
   s.description = "Wherewolf allows you to consume search terms as strings without worrying about database injections. It parses the query and converts it into ARel. It's great for creating filterable REST APIs."
   s.email = "myles@madpilot.com.au"
   s.extra_rdoc_files = [
@@ -47,7 +47,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/madpilot/wherewolf"
   s.licenses = ["MIT"]
-  s.rubygems_version = "2.4.3"
+  s.rubygems_version = "2.4.6"
   s.summary = "Makes filtering and searching to your REST API crazy easy."
 
   if s.respond_to? :specification_version then
