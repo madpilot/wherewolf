@@ -1,4 +1,4 @@
-# wherewolf [![Build Status](https://secure.travis-ci.org/madpilot/wherewolf.png)](http://travis-ci.org/madpilot/wherewolf) 
+# wherewolf [![Build Status](https://secure.travis-ci.org/madpilot/wherewolf.png)](http://travis-ci.org/madpilot/wherewolf) [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 Makes adding filtering and searching to your REST API crazy easy.
 
